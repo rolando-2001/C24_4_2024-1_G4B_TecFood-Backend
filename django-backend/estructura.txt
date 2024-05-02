@@ -1,0 +1,138 @@
+src
+│
+├── main
+│   ├── java
+│   │   └── com
+│   │       └── example
+│   │           └── myapp
+│   │               ├── config
+│   │               │   ├── DatabaseConfig.java
+│   │               │   └── SecurityConfig.java
+│   │               │
+│   │               ├── model
+│   │               │   ├── Model1.java
+│   │               │   ├── Model2.java
+│   │               │   ├── Model3.java
+│   │               │   ├── Model4.java
+│   │               │   └── Model5.java
+│   │               │
+│   │               ├── util
+│   │               │   └── ValidationUtil.java
+│   │               │
+│   │               ├── security
+│   │               │   └── JWTTokenProvider.java
+│   │               │
+│   │               ├── aspect
+│   │               │   └── LoggingAspect.java
+│   │               │
+│   │               ├── enums
+│   │               │   ├── Model1Type.java
+│   │               │   ├── Model2Status.java
+│   │               │   ├── Model3Category.java
+│   │               │   ├── Model4Role.java
+│   │               │   └── Model5Permission.java
+│   │               │
+│   │               ├── model1
+│   │               │   ├── controller
+│   │               │   │   └── Model1Controller.java
+│   │               │   ├── service
+│   │               │   │   └── Model1Service.java
+│   │               │   ├── repository
+│   │               │   │   └── Model1Repository.java
+│   │               │   └── dto
+│   │               │       └── Model1DTO.java
+│   │               │
+│   │               ├── model2
+│   │               │   ├── controller
+│   │               │   │   └── Model2Controller.java
+│   │               │   ├── service
+│   │               │   │   └── Model2Service.java
+│   │               │   ├── repository
+│   │               │   │   └── Model2Repository.java
+│   │               │   └── dto
+│   │               │       └── Model2DTO.java
+│   │               │
+│   │               ├── model3
+│   │               │   ├── controller
+│   │               │   │   └── Model3Controller.java
+│   │               │   ├── service
+│   │               │   │   └── Model3Service.java
+│   │               │   ├── repository
+│   │               │   │   └── Model3Repository.java
+│   │               │   └── dto
+│   │               │       └── Model3DTO.java
+│   │               │
+│   │               ├── model4
+│   │               │   ├── controller
+│   │               │   │   └── Model4Controller.java
+│   │               │   ├── service
+│   │               │   │   └── Model4Service.java
+│   │               │   ├── repository
+│   │               │   │   └── Model4Repository.java
+│   │               │   └── dto
+│   │               │       └── Model4DTO.java
+│   │               │
+│   │               └── model5
+│   │                   ├── controller
+│   │                   │   └── Model5Controller.java
+│   │                   ├── service
+│   │                   │   └── Model5Service.java
+│   │                   ├── repository
+│   │                   │   └── Model5Repository.java
+│   │                   └── dto
+│   │                       └── Model5DTO.java
+│   │
+│   └── resources
+│       ├── application.properties
+│       ├── static
+│       ├── templates
+│       └── db
+│           └── migration
+│               └── V1__Initial_Setup.sql
+│
+└── test
+    ├── java
+    │   └── com
+    │       └── example
+    │           └── myapp
+    │               ├── model1
+    │               │   ├── controller
+    │               │   │   └── Model1ControllerTest.java
+    │               │   ├── service
+    │               │   │   └── Model1ServiceTest.java
+    │               │   └── repository
+    │               │       └── Model1RepositoryTest.java
+    │               │
+    │               ├── model2
+    │               │   ├── controller
+    │               │   │   └── Model2ControllerTest.java
+    │               │   ├── service
+    │               │   │   └── Model2ServiceTest.java
+    │               │   └── repository
+    │               │       └── Model2RepositoryTest.java
+    │               │
+    │               ├── model3
+    │               │   ├── controller
+    │               │   │   └── Model3ControllerTest.java
+    │               │   ├── service
+    │               │   │   └── Model3ServiceTest.java
+    │               │   └── repository
+    │               │       └── Model3RepositoryTest.java
+    │               │
+    │               ├── model4
+    │               │   ├── controller
+    │               │   │   └── Model4ControllerTest.java
+    │               │   ├── service
+    │               │   │   └── Model4ServiceTest.java
+    │               │   └── repository
+    │               │       └── Model4RepositoryTest.java
+    │               │
+    │               └── model5
+    │                   ├── controller
+    │                   │   └── Model5ControllerTest.java
+    │                   ├── service
+    │                   │   └── Model5ServiceTest.java
+    │                   └── repository
+    │                       └── Model5RepositoryTest.java
+    │
+    └── resources
