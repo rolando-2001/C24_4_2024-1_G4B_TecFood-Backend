@@ -40,3 +40,28 @@ src
                     │
                     └── repository
                         └── UserRepositoryTest.java
+
+
+└── src
+    └── main
+        └── java
+            └── com
+                └── backend
+                    └── app
+                        ├── TecFoodApplication.java
+                        ├── config
+                        │   └── SecurityConfig.java
+                        ├── controller
+                        │   └── UserController.java
+                        ├── dto
+                        │   └── UserDTO.java
+                        ├── exception
+                        │   └── CustomException.java
+                        ├── model
+                        │   └── User.java
+                        ├── repository
+                        │   └── UserRepository.java
+                        ├── service
+                        │   └── UserService.java
+                        └── util
+                            └── UtilityClass.java
