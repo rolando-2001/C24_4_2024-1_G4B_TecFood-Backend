@@ -1,6 +1,7 @@
 package com.backend.app.controllers;
 
 import com.backend.app.models.IAuthService;
+import com.backend.app.models.dtos.auth.LoginGoogleUserDto;
 import com.backend.app.models.dtos.auth.LoginUserDto;
 import com.backend.app.models.dtos.auth.RegisterUserDto;
 import com.backend.app.models.responses.auth.LoginUserResponse;
@@ -28,15 +29,12 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginUserResponse> login(@RequestBody @Valid LoginUserDto loginUserDto) throws Exception {
-        System.out.println(loginUserDto + "AuthRequest");
         return new ResponseEntity<>(authService.login(loginUserDto), HttpStatus.OK);
     }
 
     @PostMapping("/login-google")
-    public ResponseEntity<LoginUserResponse> loginGoogle(@RequestBody @Valid LoginUserDto loginUserDto) throws Exception {
-        System.out.println(loginUserDto + "AuthRequest");
-        return new ResponseEntity<>(authService.login(loginUserDto), HttpStatus.OK);
+    public ResponseEntity<LoginUserResponse> loginGoogle(@RequestBody @Valid LoginGoogleUserDto loginGoogleUserDto) throws Exception {
+        return new ResponseEntity<>(authService.loginGoogle(loginGoogleUserDto), HttpStatus.OK);
     }
-
 
 }

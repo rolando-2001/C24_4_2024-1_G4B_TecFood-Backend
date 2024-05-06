@@ -2,10 +2,12 @@ package com.backend.app.services;
 
 import com.backend.app.exception.CustomException;
 import com.backend.app.models.IAuthService;
+import com.backend.app.models.dtos.auth.LoginGoogleUserDto;
 import com.backend.app.models.dtos.auth.LoginUserDto;
 import com.backend.app.models.dtos.auth.RegisterUserDto;
 import com.backend.app.models.responses.auth.LoginUserResponse;
 import com.backend.app.models.responses.auth.RegisterUserResponse;
+import com.backend.app.models.validations.auth.LoginGoogleUserValidation;
 import com.backend.app.models.validations.auth.RegisterUserValidation;
 import com.backend.app.persistence.entities.ERole;
 import com.backend.app.persistence.entities.UserEntity;
@@ -48,6 +50,42 @@ public class AuthServiceImpl implements IAuthService {
         );
     }
 
+    public LoginUserResponse loginGoogle(LoginGoogleUserDto loginGoogleUserDto) throws Exception {
+        String error = LoginGoogleUserValidation.validate(loginGoogleUserDto);
+        if(error != null) throw CustomException.badRequest(error);
+
+        UserEntity user = userRepository.findByEmail(loginGoogleUserDto.email());
+        if (user == null) {
+            user = UserEntity.builder()
+                    .email(loginGoogleUserDto.email())
+                    .password(passwordEncoder.encode("google" + loginGoogleUserDto.email()))
+                    .role(roleRepository.findByName(ERole.ROLE_USER))
+                    .firstName(loginGoogleUserDto.firstName())
+                    .lastName(loginGoogleUserDto.lastName())
+                    .imgUrl(loginGoogleUserDto.imgUrl())
+                    .isGoogleAccount(true)
+                    .isVerifiedEmail(true)
+                    .createdAt(LocalDateTime.now())
+                    .updatedAt(LocalDateTime.now())
+                    .build();
+            userRepository.save(user);
+        } else {
+            if (!user.isGoogleAccount() || !user.isVerifiedEmail()) {
+                user.setGoogleAccount(true);
+                user.setVerifiedEmail(true);
+                user.setUpdatedAt(LocalDateTime.now());
+                userRepository.save(user);
+            }
+        }
+
+        String token = jwtUtility.generateJWT(user.getId());
+        return new LoginUserResponse(
+                "Login successful",
+                user,
+                token
+        );
+    }
+
     public RegisterUserResponse register(RegisterUserDto registerUserDto) throws Exception {
         UserEntity user = userRepository.findByEmail(registerUserDto.email());
         if (user != null) throw CustomException.badRequest("Email already exists");
@@ -73,4 +111,5 @@ public class AuthServiceImpl implements IAuthService {
                 "User " + user.getEmail() + " created successfully"
         );
     }
+
 }
