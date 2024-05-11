@@ -29,6 +29,7 @@ public class SecutiryConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authRequest -> {
                     authRequest.requestMatchers("/api/auth/**").permitAll();
+                    authRequest.requestMatchers("/api/product/**").permitAll();
                     authRequest.anyRequest().authenticated();
                         }
 

@@ -25,7 +25,7 @@ public class TecFoodApplication {
 		SpringApplication.run(TecFoodApplication.class, args);
 	}
 
-	@Autowired
+	/*@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Bean
@@ -77,6 +77,6 @@ public class TecFoodApplication {
 		});
 
 	}
-
+*/
 
 	}

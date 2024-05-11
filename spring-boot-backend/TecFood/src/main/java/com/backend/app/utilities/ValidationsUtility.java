@@ -36,7 +36,7 @@ public class ValidationsUtility {
         }
 
         public static boolean isPhoneNumberValid(String phoneNumber) {
-            return phoneNumber.matches("^\\+(?:[0-9] ?){6,14}[0-9]$");
+            return phoneNumber.matches("^\\d{9}$");
         }
 
         public static boolean isDniValid(String dni) {
