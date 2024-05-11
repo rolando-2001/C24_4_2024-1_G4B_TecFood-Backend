@@ -69,7 +69,6 @@ public class JwtUtility {
         if (claimsSet.getExpirationTime().before(new Date())) {
             throw new JOSEException("Expired token");
         }
-
         return claimsSet;
     }
 

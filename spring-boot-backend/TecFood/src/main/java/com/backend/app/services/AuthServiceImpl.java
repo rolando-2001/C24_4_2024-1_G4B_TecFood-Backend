@@ -4,6 +4,7 @@ import com.backend.app.exception.CustomException;
 import com.backend.app.models.IAuthService;
 import com.backend.app.models.dtos.auth.LoginGoogleUserDto;
 import com.backend.app.models.dtos.auth.LoginUserDto;
+import com.backend.app.models.dtos.auth.RevalidateTokenDto;
 import com.backend.app.models.dtos.auth.RegisterUserDto;
 import com.backend.app.models.responses.auth.LoginUserResponse;
 import com.backend.app.models.responses.auth.RegisterUserResponse;
@@ -15,10 +16,13 @@ import com.backend.app.persistence.repositories.RoleRepository;
 import com.backend.app.persistence.repositories.UserRepository;
 import com.backend.app.utilities.JwtUtility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class AuthServiceImpl implements IAuthService {
@@ -90,6 +94,12 @@ public class AuthServiceImpl implements IAuthService {
         UserEntity user = userRepository.findByEmail(registerUserDto.email());
         if (user != null) throw CustomException.badRequest("Email already exists");
 
+        if(!registerUserDto.dni().isEmpty()) {
+            user = userRepository.findByDni(registerUserDto.dni());
+            if (user != null) throw CustomException.badRequest("DNI already exists");
+        }
+
+
         String error = RegisterUserValidation.validate(registerUserDto);
         if(error != null) throw CustomException.badRequest(error);
 
@@ -109,6 +119,21 @@ public class AuthServiceImpl implements IAuthService {
 
         return new RegisterUserResponse(
                 "User " + user.getEmail() + " created successfully"
+        );
+    }
+
+    public LoginUserResponse revalidateToken() throws Exception {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = authentication.getName();
+        UserEntity user = userRepository.findById(Long.parseLong(userId)).orElseThrow(
+                () -> CustomException.badRequest("User not found")
+        );
+
+        String token = jwtUtility.generateJWT(user.getId());
+        return new LoginUserResponse(
+                "Token refreshed",
+                    user,
+                    token
         );
     }
 

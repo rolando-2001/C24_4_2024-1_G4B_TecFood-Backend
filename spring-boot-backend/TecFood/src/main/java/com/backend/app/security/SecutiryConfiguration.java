@@ -28,7 +28,8 @@ public class SecutiryConfiguration {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authRequest -> {
-                    authRequest.requestMatchers("/api/auth/**").permitAll();
+                    authRequest.requestMatchers(HttpMethod.POST ,"/api/auth/**").permitAll();
+                    authRequest.requestMatchers("/api/user/**").permitAll();
                     authRequest.anyRequest().authenticated();
                         }
 
@@ -36,7 +37,7 @@ public class SecutiryConfiguration {
                 .sessionManagement(sessionManager ->
                         sessionManager
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-               // .addFilterBefore(new JWTAuthorizationFilter(this.jwtUtility), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JWTAuthorizationFilter(this.jwtUtility), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exceptionHandling ->
                         exceptionHandling
                                 .authenticationEntryPoint((request, response, authException) -> {

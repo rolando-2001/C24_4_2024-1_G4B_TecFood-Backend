@@ -42,7 +42,7 @@ public class TecFoodApplication {
 		UserEntity userWerner = UserEntity.builder()
 				.firstName("Werner")
 				.lastName("Werner")
-				.email("werner@gmail.com")
+				.email("werner@tecsup.edu.pe")
 				.password(passwordEncoder.encode("aLTEC2021"))
 				.dni("12345678")
 				.isGoogleAccount(false)

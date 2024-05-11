@@ -36,7 +36,7 @@ public class UserEntity implements Serializable {
     @Column(name="password", nullable = false)
     private String password;
 
-    @Column(name="dni", unique = true)
+    @Column(name="dni")
     private String dni;
 
     @Column(name="img_url")
