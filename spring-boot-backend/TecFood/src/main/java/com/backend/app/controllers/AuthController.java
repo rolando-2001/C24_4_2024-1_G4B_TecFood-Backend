@@ -3,7 +3,6 @@ package com.backend.app.controllers;
 import com.backend.app.models.IAuthService;
 import com.backend.app.models.dtos.auth.LoginGoogleUserDto;
 import com.backend.app.models.dtos.auth.LoginUserDto;
-import com.backend.app.models.dtos.auth.RevalidateTokenDto;
 import com.backend.app.models.dtos.auth.RegisterUserDto;
 import com.backend.app.models.responses.auth.LoginUserResponse;
 import com.backend.app.models.responses.auth.RegisterUserResponse;
@@ -39,5 +38,4 @@ public class AuthController {
     public ResponseEntity<LoginUserResponse> revalidateToken() throws Exception {
         return new ResponseEntity<>(authService.revalidateToken(), HttpStatus.OK);
     }
-
 }
